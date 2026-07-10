@@ -1,12 +1,457 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Vishal Vivek — BTech CSE student, AI/ML & Computer Vision." />
+<title>Vishal Vivek — Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --bg:#0b0b0c;
+    --bg-2:#141416;
+    --ink:#f4f2ee;
+    --ink-soft:#9a9a97;
+    --line:#232325;
+    --volt:#d7ff3e;
+    --volt-dim:#8a9a2a;
+    --card:#111113;
+    --serif:"Unbounded", sans-serif;
+    --sans:"Space Grotesk", sans-serif;
+    --mono:"JetBrains Mono", monospace;
+    --maxw:1280px;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:var(--sans);font-weight:400;line-height:1.6;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+    cursor:none;
+  }
+  ::selection{background:var(--volt);color:#000}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  button{font-family:inherit;cursor:none;border:none;background:none;color:inherit}
+  a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--volt);outline-offset:3px}
+
+  #cursor{
+    position:fixed;top:0;left:0;width:22px;height:22px;border-radius:50%;
+    border:1px solid var(--volt);pointer-events:none;z-index:999;
+    transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;
+    mix-blend-mode:difference;
+  }
+  #cursor.big{width:64px;height:64px;background:var(--volt);mix-blend-mode:normal;}
+  @media (hover:none){ #cursor{display:none} body{cursor:auto} }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 48px}
+  @media (max-width:720px){.wrap{padding:0 22px}}
+
+  .section{padding:160px 0;border-top:1px solid var(--line);position:relative}
+  @media (max-width:720px){.section{padding:90px 0}}
+
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:800;letter-spacing:-0.02em;line-height:1;margin:0;color:var(--ink)}
+  h2{font-size:clamp(2.4rem,6vw,4.5rem)}
+  p{color:var(--ink-soft)}
+  .lead{font-size:18px;max-width:56ch}
+
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--volt);display:inline-flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:20px;height:1px;background:var(--volt)}
+
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:80;padding:26px 48px;
+    display:flex;align-items:center;justify-content:space-between;
+    mix-blend-mode:difference;
+  }
+  @media (max-width:720px){.nav{padding:18px 22px}}
+  .brand{font-family:var(--serif);font-weight:900;font-size:20px;letter-spacing:-0.01em}
+  .nav-links{display:flex;gap:34px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  .nav-links a{position:relative}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--ink);transition:width .3s}
+  .nav-links a:hover::after{width:100%}
+  @media (max-width:860px){.nav-links{display:none}}
+
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:140px 0 60px;position:relative}
+  .hero-kicker{
+    font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink-soft);margin-bottom:28px;display:flex;gap:28px;flex-wrap:wrap;
+  }
+  .hero-kicker b{color:var(--volt);font-weight:500}
+
+  .marquee-title{
+    font-family:var(--serif);font-weight:900;letter-spacing:-0.04em;line-height:.86;
+    font-size:clamp(2.6rem,10vw,8.5rem);margin:0;
+  }
+  .marquee-title .out{color:var(--ink)}
+  .marquee-title .fill{-webkit-text-stroke:2px var(--ink);color:transparent}
+  .hero-sub{
+    display:flex;justify-content:space-between;align-items:flex-end;gap:40px;
+    margin-top:56px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:36px;
+  }
+  .hero-sub p{max-width:44ch;font-size:17px}
+  .hero-cta{display:flex;gap:18px;flex-wrap:wrap}
+  .btn{
+    padding:16px 30px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    border:1px solid var(--ink);color:var(--ink);background:transparent;
+    transition:background .25s,color .25s;display:inline-flex;align-items:center;gap:10px;
+  }
+  .btn:hover{background:var(--volt);color:#000;border-color:var(--volt)}
+  .btn.primary{background:var(--volt);color:#000;border-color:var(--volt)}
+  .btn.primary:hover{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+
+  .strip{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0;background:var(--bg-2)}
+  .strip-track{display:flex;gap:60px;white-space:nowrap;animation:scroll 24s linear infinite;width:max-content}
+  .strip-track span{font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--ink-soft);display:flex;align-items:center;gap:60px}
+  .strip-track span em{font-style:normal;color:var(--volt)}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  .about-grid{display:grid;grid-template-columns:.9fr 1.4fr;gap:80px}
+  @media (max-width:900px){.about-grid{grid-template-columns:1fr;gap:40px}}
+  .about-text p{font-family:var(--serif);font-size:clamp(1.3rem,2.2vw,1.9rem);font-weight:600;line-height:1.3;color:var(--ink);margin:0 0 28px;letter-spacing:-0.01em}
+  .about-text .body{font-family:var(--sans);font-size:16px;font-weight:400;color:var(--ink-soft);line-height:1.7}
+  .about-facts{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);margin-top:56px;border:1px solid var(--line)}
+  .fact{background:var(--bg);padding:28px}
+  .fact .n{font-family:var(--serif);font-size:2.6rem;font-weight:900;color:var(--volt);display:block;line-height:1}
+  .fact .l{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-top:10px;display:block}
+  .fact .s{font-family:var(--sans);font-size:12px;color:var(--ink-soft);margin-top:8px;display:block;line-height:1.4}
+
+  .section-header{display:flex;justify-content:space-between;align-items:end;margin-bottom:80px;gap:40px;flex-wrap:wrap}
+  .section-header p{max-width:34ch}
+
+  .skills-list{border-top:1px solid var(--line)}
+  .skill{display:grid;grid-template-columns:60px 1fr auto;align-items:center;gap:24px;padding:28px 0;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+  .skill-index{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+  .skill-name{font-family:var(--serif);font-size:clamp(1.3rem,3vw,2rem);font-weight:700;letter-spacing:-0.01em;position:relative;z-index:2;transition:color .3s}
+  .skill-fill{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--volt);z-index:1;transition:width .6s cubic-bezier(.2,.7,.2,1)}
+  .skill:hover .skill-fill{width:var(--w)}
+  .skill:hover .skill-name{color:#000}
+  .skill-tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);text-align:right;position:relative;z-index:2}
+
+  .projects{display:grid;gap:2px;background:var(--line);border:1px solid var(--line)}
+  .project{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--bg);position:relative}
+  @media (max-width:900px){.project{grid-template-columns:1fr}}
+  .project-info{padding:56px;display:flex;flex-direction:column;justify-content:center}
+  .project-num{font-family:var(--mono);font-size:12px;color:var(--volt);margin-bottom:20px;letter-spacing:.1em}
+  .project-title{font-family:var(--serif);font-size:clamp(1.6rem,3.5vw,2.6rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:18px}
+  .project-desc{max-width:42ch;margin-bottom:28px}
+  .project-tags{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+  .project-tags span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--line);padding:6px 12px}
+  .project-link{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;display:inline-flex;gap:10px;align-items:center;color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:4px;align-self:flex-start;transition:color .2s,border-color .2s}
+  .project-link:hover{color:var(--volt);border-color:var(--volt)}
+  .project-visual{background:var(--bg-2);position:relative;min-height:300px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .project-visual .glyph{font-family:var(--serif);font-size:clamp(5rem,12vw,9rem);font-weight:900;color:var(--line);letter-spacing:-0.05em;transition:color .4s, transform .6s;text-align:center}
+  .project:hover .glyph{color:var(--volt-dim);transform:scale(1.05)}
+
+  .timeline-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+  @media (max-width:900px){.timeline-wrap{grid-template-columns:1fr;gap:60px}}
+  .timeline-title{font-family:var(--serif);font-size:1.3rem;font-weight:700;margin-bottom:36px;color:var(--volt);text-transform:uppercase;letter-spacing:.06em}
+  .tl-item{padding:0 0 40px;border-left:2px solid var(--line);padding-left:28px;position:relative;margin-left:2px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-item::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;background:var(--bg);border:2px solid var(--ink-soft);border-radius:50%;transition:background .3s,border-color .3s}
+  .tl-item:hover::before{background:var(--volt);border-color:var(--volt)}
+  .tl-date{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px;display:block}
+  .tl-role{font-family:var(--serif);font-size:1.2rem;font-weight:700;margin:0 0 4px}
+  .tl-place{font-size:13px;color:var(--volt-dim);margin-bottom:10px;font-family:var(--mono)}
+  .tl-desc{font-size:14px;margin:0;max-width:40ch}
+
+  .quotes{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  @media (max-width:900px){.quotes{grid-template-columns:1fr 1fr}}
+  @media (max-width:600px){.quotes{grid-template-columns:1fr}}
+  .quote{background:var(--bg);padding:36px 28px;display:flex;flex-direction:column;gap:14px}
+  .quote .mark{font-family:var(--serif);font-size:2.2rem;color:var(--volt);line-height:.6}
+  .quote blockquote{margin:0;font-family:var(--serif);font-size:1rem;line-height:1.4;color:var(--ink);font-weight:600}
+  .quote .sub{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-soft)}
+
+  .contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:80px}
+  @media (max-width:900px){.contact-grid{grid-template-columns:1fr;gap:50px}}
+  .contact-hero h2{margin-bottom:24px}
+  .contact-hero .accent{color:var(--volt)}
+  .contact-hero p{max-width:38ch;margin-bottom:36px}
+  .contact-list{list-style:none;padding:0;margin:0;display:grid;gap:18px}
+  .contact-list a{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:14px;letter-spacing:.04em;transition:color .2s;border-bottom:1px solid var(--line);padding-bottom:14px}
+  .contact-list a:hover{color:var(--volt)}
+
+  form{display:grid;gap:22px}
+  .field{display:grid;gap:8px}
+  .field label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+  .field input,.field textarea{background:transparent;border:none;border-bottom:1px solid var(--line);padding:12px 0;font-family:var(--sans);font-size:1.05rem;color:var(--ink);resize:none;transition:border-color .3s}
+  .field input::placeholder,.field textarea::placeholder{color:var(--ink-soft)}
+  .field input:focus,.field textarea:focus{outline:none;border-bottom-color:var(--volt)}
+  .field textarea{min-height:110px;line-height:1.5}
+  .form-status{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--volt);min-height:16px}
+
+  footer{padding:100px 0 40px;border-top:1px solid var(--line)}
+  .footer-huge{font-family:var(--serif);font-size:clamp(2.6rem,12vw,9rem);font-weight:900;line-height:.86;letter-spacing:-0.03em;margin:0 0 70px}
+  .footer-huge .accent{color:var(--volt)}
+  .footer-bar{display:flex;justify-content:space-between;align-items:center;padding-top:30px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);flex-wrap:wrap;gap:16px}
+  .footer-links{display:flex;gap:24px}
+  .footer-links a:hover{color:var(--volt)}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.is-in{opacity:1;transform:translateY(0)}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head>
 <body>
-    <h1>Hello world</h1>
-    
+
+<div id="cursor"></div>
+
+<header class="nav" id="nav">
+  <a href="#top" class="brand">VISHAL VIVEK</a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#skills">Stack</a>
+    <a href="#journey">Journey</a>
+    <a href="#now">Now</a>
+    <a href="#reserved">More</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <section class="hero wrap">
+    <div class="hero-kicker">
+      <span>BTech CSE · <b>Expected 2027</b></span>
+      <span>Based in <b>Kannur, Kerala</b></span>
+      <span>Focus: <b>AI / ML / CV</b></span>
+      <span>Open to <b>Internships</b></span>
+    </div>
+    <h1 class="marquee-title">
+      <span class="out">TRAIN</span><span class="fill">.</span> <span class="fill">BUILD.</span><br/>
+      <span class="fill">SHIP</span><span class="out">.</span>
+    </h1>
+    <div class="hero-sub">
+      <p>I'm Vishal — a Computer Science undergraduate at Vimal Jyothi Engineering College, working on AI, machine learning, and full-stack development. Sign language recognition, hotel booking systems, interview coaching bots — one project at a time.</p>
+      <div class="hero-cta">
+        <a href="#work" class="btn primary">See my projects</a>
+        <a href="#contact" class="btn">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip" aria-hidden="true">
+    <div class="strip-track">
+      <span>PYTHON <em>·</em> TENSORFLOW <em>·</em> OPENCV <em>·</em> COMPUTER VISION <em>·</em> DEEP LEARNING <em>·</em></span>
+      <span>PYTHON <em>·</em> TENSORFLOW <em>·</em> OPENCV <em>·</em> COMPUTER VISION <em>·</em> DEEP LEARNING <em>·</em></span>
+    </div>
+  </div>
+
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="reveal"><span class="eyebrow">01 — About</span></div>
+        <div class="about-text reveal">
+          <p>I build software that understands people — through vision, language, and a lot of debugging.</p>
+          <p class="body">I'm a Computer Science &amp; Engineering undergraduate at Vimal Jyothi Engineering College, Chemperi, Kannur — expected to graduate in 2027. I have hands-on experience across Python, Machine Learning, Artificial Intelligence, and full-stack development through academic and personal projects. Coursework spans Data Structures &amp; Algorithms, DBMS, Operating Systems, Computer Networks, OOP, and Software Engineering. Outside of that, I'm usually shipping a side project or working through a certification.</p>
+          <div class="about-facts">
+            <div class="fact"><span class="n">2027</span><span class="l">Expected Graduation</span><span class="s">On track, final year ahead</span></div>
+            <div class="fact"><span class="n">4</span><span class="l">Certifications</span><span class="s">Across AI/ML &amp; software dev</span></div>
+            <div class="fact"><span class="n">3</span><span class="l">Major Projects</span><span class="s">Built solo &amp; collaboratively</span></div>
+            <div class="fact"><span class="n">Open</span><span class="l">To Internships</span><span class="s">Available now — let's talk</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <div class="wrap">
+      <div class="section-header reveal">
+        <div><span class="eyebrow">02 — Stack</span><h2 style="margin-top:18px">Tools I reach for.</h2></div>
+        <p>Hover a row — the bar is a rough comfort level.</p>
+      </div>
+      <div class="skills-list">
+        <div class="skill reveal" style="--w:88%"><div class="skill-fill"></div><div class="skill-index">01</div><div class="skill-name">Python, Java, C, PHP</div><div class="skill-tag">Languages</div></div>
+        <div class="skill reveal" style="--w:80%"><div class="skill-fill"></div><div class="skill-index">02</div><div class="skill-name">TensorFlow, OpenCV, NumPy, CVZone</div><div class="skill-tag">AI / ML libraries</div></div>
+        <div class="skill reveal" style="--w:75%"><div class="skill-fill"></div><div class="skill-index">03</div><div class="skill-name">Flask, REST APIs, Flutter</div><div class="skill-tag">Web technologies</div></div>
+        <div class="skill reveal" style="--w:78%"><div class="skill-fill"></div><div class="skill-index">04</div><div class="skill-name">MongoDB, SQLite, MySQL</div><div class="skill-tag">Databases</div></div>
+        <div class="skill reveal" style="--w:82%"><div class="skill-fill"></div><div class="skill-index">05</div><div class="skill-name">Git, GitHub, VS Code, Android Studio</div><div class="skill-tag">Tools</div></div>
+        <div class="skill reveal" style="--w:76%"><div class="skill-fill"></div><div class="skill-index">06</div><div class="skill-name">DSA, DBMS, OS, Networks, OOP</div><div class="skill-tag">Core CS</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="section-header reveal">
+        <div><span class="eyebrow">03 — Selected Work</span><h2 style="margin-top:18px">Projects I've shipped.</h2></div>
+        <p>Picked for range — vision, ML, and web.</p>
+      </div>
+      <div class="projects">
+        <a href="https://github.com/vishalvivek14332-source/Sign-Language-to-Text-and-Speech" target="_blank" rel="noopener" class="project reveal">
+          <div class="project-info">
+            <div class="project-num">Project 01</div>
+            <div class="project-title">Sign Language to Text &amp; Speech</div>
+            <p class="project-desc">A real-time sign language recognition system using computer vision and deep learning, achieving 85% gesture recognition accuracy. Hand gestures are converted to text and speech via a trained CNN model, with Text-to-Speech integrated for accessibility.</p>
+            <div class="project-tags"><span>Python</span><span>OpenCV</span><span>TensorFlow</span><span>CVZone</span></div>
+            <span class="project-link">View on GitHub →</span>
+          </div>
+          <div class="project-visual"><span class="glyph">🤟</span></div>
+        </a>
+        <a href="#" class="project reveal">
+          <div class="project-info">
+            <div class="project-num">Project 02</div>
+            <div class="project-title">Hotel Management System</div>
+            <p class="project-desc">A collaborative web-based system for room booking, admin management, and customer records — with user authentication, room listings (single/double/luxury), and a full booking confirmation flow backed by MySQL.</p>
+            <div class="project-tags"><span>PHP</span><span>MySQL</span><span>HTML</span><span>CSS</span></div>
+            <span class="project-link">Collaborative project</span>
+          </div>
+          <div class="project-visual"><span class="glyph">🏨</span></div>
+        </a>
+        <a href="https://github.com/vishalvivek14332-source/AI-Interview-Coach-" target="_blank" rel="noopener" class="project reveal">
+          <div class="project-info">
+            <div class="project-num">Project 03</div>
+            <div class="project-title">AI Interview Coach <span style="color:var(--volt-dim);font-size:0.5em;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;">— in development</span></div>
+            <p class="project-desc">A full-stack web app with a Flask backend and REST API integration for real-time functionality. Database schema in SQLite handles auth, sessions, and reports, alongside an AI-generated feedback module.</p>
+            <div class="project-tags"><span>Flask</span><span>SQLite</span><span>REST API</span><span>LLM API</span></div>
+            <span class="project-link">View on GitHub →</span>
+          </div>
+          <div class="project-visual"><span class="glyph">🎤</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="journey">
+    <div class="wrap">
+      <div class="section-header reveal">
+        <div><span class="eyebrow">04 — Journey</span><h2 style="margin-top:18px">How I got here.</h2></div>
+        <p>Education and the skills built along the way.</p>
+      </div>
+      <div class="timeline-wrap">
+        <div class="reveal">
+          <h3 class="timeline-title">Education</h3>
+          <div class="tl-item"><span class="tl-date">Final Year</span><h4 class="tl-role">BTech, Computer Science &amp; Engineering</h4><div class="tl-place">Kerala, India</div><p class="tl-desc">Coursework and self-driven projects spanning AI, machine learning, deep learning, and software development.</p></div>
+          <div class="tl-item"><span class="tl-date">Ongoing</span><h4 class="tl-role">Self-taught: AI &amp; Computer Vision</h4><div class="tl-place">Independent study</div><p class="tl-desc">Learning through building — from gesture recognition to emotion detection.</p></div>
+        </div>
+        <div class="reveal">
+          <h3 class="timeline-title">Focus Areas</h3>
+          <div class="tl-item"><span class="tl-date">Interest</span><h4 class="tl-role">Computer Vision</h4><div class="tl-place">Real-time recognition systems</div><p class="tl-desc">Gesture, face, and emotion recognition using OpenCV and TensorFlow.</p></div>
+          <div class="tl-item"><span class="tl-date">Interest</span><h4 class="tl-role">Intelligent Systems</h4><div class="tl-place">Applied ML</div><p class="tl-desc">Building tools that solve real, everyday problems rather than toy demos.</p></div>
+          <div class="tl-item"><span class="tl-date">Interest</span><h4 class="tl-role">Software Development</h4><div class="tl-place">Full-stack engineering</div><p class="tl-desc">From backend logic to polished interfaces — building products end to end.</p></div>
+          <div class="tl-item"><span class="tl-date">Interest</span><h4 class="tl-role">Open Source</h4><div class="tl-place">Community &amp; collaboration</div><p class="tl-desc">Learning in public, one repository at a time.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="now">
+    <div class="wrap">
+      <div class="section-header reveal">
+        <div><span class="eyebrow">05 — Currently</span><h2 style="margin-top:18px">What I'm into right now.</h2></div>
+        <p>Always learning, always building.</p>
+      </div>
+      <div class="quotes">
+        <div class="quote reveal"><div class="mark">01</div><blockquote>Deep Learning fundamentals — CNNs, RNNs, and where they break.</blockquote><div class="sub">Learning</div></div>
+        <div class="quote reveal"><div class="mark">02</div><blockquote>A new computer vision side-project every few months.</blockquote><div class="sub">Building</div></div>
+        <div class="quote reveal"><div class="mark">03</div><blockquote>Software development — writing clean, full-stack code end to end.</blockquote><div class="sub">Into it</div></div>
+        <div class="quote reveal"><div class="mark">04</div><blockquote>Interview prep — for the placements ahead.</blockquote><div class="sub">Preparing</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="reserved">
+    <div class="wrap">
+      <span class="eyebrow reveal">06 — Reserved</span>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="contact-hero reveal">
+          <span class="eyebrow">07 — Contact</span>
+          <h2 style="margin-top:18px">Let's build something <span class="accent">smart</span>.</h2>
+          <p>Looking for internships, collaborations, or just a chat about AI and computer vision — reach out.</p>
+          <ul class="contact-list">
+            <li><a href="mailto:vishalvivek14332@gmail.com">vishalvivek14332@gmail.com</a></li>
+            <li><a href="https://www.linkedin.com/in/vishal-vivek-008437322/" target="_blank" rel="noopener">LinkedIn — vishal-vivek</a></li>
+            <li><a href="https://github.com/vishalvivek14332-source" target="_blank" rel="noopener">GitHub — vishalvivek14332-source</a></li>
+          </ul>
+        </div>
+        <form class="reveal" id="contactForm" novalidate>
+          <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" placeholder="Your full name" required /></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@company.com" required /></div>
+          <div class="field"><label for="subject">Subject</label><input id="subject" name="subject" type="text" placeholder="What is this about?" /></div>
+          <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell me a little about the opportunity…" required></textarea></div>
+          <div class="form-status" id="formStatus" aria-live="polite"></div>
+          <button type="submit" class="btn primary" style="justify-self:start">Send message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-huge reveal">Let's <span class="accent">connect</span>.</div>
+    <div class="footer-bar">
+      <div>© 2026 Vishal Vivek</div>
+      <div class="footer-links"><a href="https://github.com/vishalvivek14332-source" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/vishal-vivek-008437322/" target="_blank" rel="noopener">LinkedIn</a><a href="mailto:vishalvivek14332@gmail.com">Email</a></div>
+      <div>BTech CSE · Kerala</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  window.addEventListener('pointermove', e=>{
+    cursor.style.left = e.clientX+'px';
+    cursor.style.top = e.clientY+'px';
+  });
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cursor.classList.add('big'));
+    el.addEventListener('mouseleave',()=>cursor.classList.remove('big'));
+  });
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); }
+    });
+  },{threshold:.12, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form).entries());
+    if(!data.name || !data.email || !data.message){
+      status.textContent = 'Please fill in name, email, and message.';
+      return;
+    }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)){
+      status.textContent = 'That email looks off — mind checking it?';
+      return;
+    }
+    const subject = encodeURIComponent(data.subject || 'Hello from your portfolio');
+    const body = encodeURIComponent(`${data.message}\n\n— ${data.name} (${data.email})`);
+    window.location.href = `mailto:vishalvivek14332@gmail.com?subject=${subject}&body=${body}`;
+    status.textContent = 'Opening your email client… thank you.';
+    form.reset();
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',(e)=>{
+      const id = a.getAttribute('href').slice(1);
+      if(!id) return;
+      const target = document.getElementById(id);
+      if(!target) return;
+      e.preventDefault();
+      const y = target.getBoundingClientRect().top + window.scrollY - 40;
+      window.scrollTo({top:y, behavior:'smooth'});
+    });
+  });
+</script>
 </body>
 </html>
