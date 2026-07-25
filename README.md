@@ -37,10 +37,6 @@ cd PortfolioNew
 
 Open `index.html` in your browser or run it using Live Server in VS Code.
 
-## 📄 License
-
-This project is licensed under the MIT License.
-
 ## 👨‍💻 Author
 
 **Vishal Vivek**
