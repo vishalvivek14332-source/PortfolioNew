@@ -13,7 +13,7 @@ https://portfolio-new-silk-beta.vercel.app/
 - Projects showcase
 - Skills section
 - Contact section
-- Fast and lightweight
+- Fast and lightweighted
 
 ## 🛠️ Tech Stack
 
